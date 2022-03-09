@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Ships:
     """
     Store positions of ships and guesses
@@ -13,15 +14,23 @@ class Ships:
 
     def position(self):
         """
-        Generate random positions of ships
+        Generate random positions for ships
         """
         for _ in range(Ships.Number_of_ships):
             self.coordinates.append([randint(0, 9), randint(0, 9)])
         print(self.coordinates)
+
+    def print_grid(self):
+        """
+        Print grid
+        """
+        for _ in range(Ships.grid_size):
+            print(Ships.grid_size*'. ', '\n')
     #@property
     #def guess_list(self):
         
     #    return self._guess_list
+
 
 class Human:
     """ 
@@ -33,12 +42,14 @@ class Human:
         """
         self.name = input("Enter your name:\n")
 
+
 class HumanPlayer(Ships, Human):
     """Has method to guess coordinates
     """
     def __init__(self):
         Human.__init__(self)
         Ships.__init__(self)
+
     def guess_coordinates(self):
         """User enters x and y coordinates to try to hit computer ship
         """
@@ -69,9 +80,9 @@ def display_score():
 
 player = HumanPlayer()
 player.guess_coordinates()
-print(f" guessed {player.guess_list}")
-
-player.position()  
+print(f"{player.name} guessed {player.guess_list}")
+player.position()
+player.print_grid()
 
         
 
