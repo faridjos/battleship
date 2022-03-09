@@ -17,15 +17,24 @@ class Ships:
         Generate random positions for ships
         """
         for _ in range(Ships.Number_of_ships):
-            self.coordinates.append([randint(0, 9), randint(0, 9)])
+            self.coordinates.append((randint(0, Ships.grid_size - 1), randint(0, Ships.grid_size - 1)))
         print(self.coordinates)
 
     def print_grid(self):
         """
         Print grid
         """
-        for _ in range(Ships.grid_size):
-            print(Ships.grid_size*'. ')
+        for i in range(Ships.grid_size):
+            for j in range(Ships.grid_size):
+                for x_y in self.coordinates:
+                    found = (i, j) == x_y
+                    if found:
+                        print('@ ', end=' ')
+                        break
+                if not found:
+                    print('. ', end=' ')
+            print('')
+
     #@property
     #def guess_list(self):
         
@@ -55,7 +64,7 @@ class HumanPlayer(Ships, Human):
         """
         x = input("Guess x-coordinate:\n")
         y = input("Guess y-coordinate:\n")
-        self.guess_list.append([int(x), int(y)])
+        self.guess_list.append((int(x), int(y)))
         print(self.guess_list)
 
 def print_game_info():
