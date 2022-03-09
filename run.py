@@ -5,8 +5,8 @@ class Ships:
     """
     Store positions of ships and guesses
     """
-    grid_size = 10
-    Number_of_ships = 5
+    grid_size = 5
+    Number_of_ships = 4
 
     def __init__(self):
         self.guess_list = []
@@ -25,7 +25,7 @@ class Ships:
         Print grid
         """
         for _ in range(Ships.grid_size):
-            print(Ships.grid_size*'. ', '\n')
+            print(Ships.grid_size*'. ')
     #@property
     #def guess_list(self):
         
