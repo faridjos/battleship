@@ -6,33 +6,41 @@ class Ships:
     Store positions of ships and guesses
     """
     grid_size = 5
-    Number_of_ships = 4
+    number_of_ships = 4
 
     def __init__(self):
         self.guess_list = []
         self.coordinates = []
 
-    def position(self):
+    def position_ships(self):
         """
         Generate random positions for ships
         """
-        for _ in range(Ships.Number_of_ships):
+        for _ in range(Ships.number_of_ships):
             self.coordinates.append((randint(0, Ships.grid_size - 1), randint(0, Ships.grid_size - 1)))
         print(self.coordinates)
 
     def print_grid(self):
         """
-        Print grid
+        Print grid. Ships are shown as "@"
         """
         for i in range(Ships.grid_size):
             for j in range(Ships.grid_size):
-                for x_y in self.coordinates:
-                    found = (i, j) == x_y
-                    if found:
-                        print('@ ', end=' ')
+                hit = False
+                for (x, y) in self.guess_list:
+                    hit = (i, j) == (x, y)
+                    if hit:
+                        print('X ', end=' ')
                         break
-                if not found:
-                    print('. ', end=' ')
+                if not hit:
+                    found_ship = False
+                    for (x, y) in self.coordinates:
+                        found_ship = (i, j) == (x, y)
+                        if found_ship:
+                            print('@ ', end=' ')
+                            break
+                    if not found_ship:
+                        print('. ', end=' ')                      
             print('')
 
     #@property
@@ -42,7 +50,7 @@ class Ships:
 
 
 class Human:
-    """ 
+    """
     Has method to input name
     """
     def __init__(self):
@@ -87,11 +95,10 @@ def display_score():
 #    display_hit_or_miss()
   #  display_score()
 
+
 player = HumanPlayer()
+player.position_ships()
+player.print_grid()
 player.guess_coordinates()
 print(f"{player.name} guessed {player.guess_list}")
-player.position()
 player.print_grid()
-
-        
-
