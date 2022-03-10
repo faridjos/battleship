@@ -3,14 +3,14 @@ from random import randint
 
 class Ships:
     """
-    Store positions of ships and guesses
+    Store positions of ships and opponent guesses
     """
     grid_size = 5
     number_of_ships = 4
 
     def __init__(self):
-        self.guess_list = []
         self.coordinates = []
+        self.guesses = []
 
     def position_ships(self):
         """
@@ -20,29 +20,7 @@ class Ships:
             self.coordinates.append((randint(0, Ships.grid_size - 1), randint(0, Ships.grid_size - 1)))
         print(self.coordinates)
 
-    def print_grid(self):
-        """
-        Print grid. Ships are shown as "@"
-        """
-        for i in range(Ships.grid_size):
-            for j in range(Ships.grid_size):
-                hit = False
-                for (x, y) in self.guess_list:
-                    hit = (i, j) == (x, y)
-                    if hit:
-                        print('X ', end=' ')
-                        break
-                if not hit:
-                    found_ship = False
-                    for (x, y) in self.coordinates:
-                        found_ship = (i, j) == (x, y)
-                        if found_ship:
-                            print('@ ', end=' ')
-                            break
-                    if not found_ship:
-                        print('. ', end=' ')                      
-            print('')
-
+    
     #@property
     #def guess_list(self):
         
@@ -61,19 +39,74 @@ class Human:
 
 
 class HumanPlayer(Ships, Human):
-    """Has method to guess coordinates
+    """Has method to guess opponent ship coordinates and print grid
     """
     def __init__(self):
         Human.__init__(self)
         Ships.__init__(self)
+        self.my_guesses = []
 
     def guess_coordinates(self):
-        """User enters x and y coordinates to try to hit computer ship
+        """User enters opponent ship coordinates to try to hit
         """
         x = input("Guess x-coordinate:\n")
         y = input("Guess y-coordinate:\n")
-        self.guess_list.append((int(x), int(y)))
-        print(self.guess_list)
+        self.my_guesses.append((int(x), int(y)))
+        #print(self.my_guesses)
+
+    def print_grid(self):
+        """
+        Print grid. Ships are shown as "@" and hits as "X"
+        """
+        for i in range(Ships.grid_size):
+            for j in range(Ships.grid_size):
+                hit = False
+                for (x, y) in self.guesses:
+                    hit = (i, j) == (x, y)
+                    if hit:
+                        print('X ', end=' ')
+                        break
+                if not hit:
+                    found_ship = False
+                    for (x, y) in self.coordinates:
+                        found_ship = (i, j) == (x, y)
+                        if found_ship:
+                            print('@ ', end=' ')
+                            break
+                    if not found_ship:
+                        print('. ', end=' ')                     
+            print('')
+
+
+class ComputerPlayer(Ships):
+    """Has method to guess opponent ship coordinates and print grid
+    """
+    def __init__(self):
+        Ships.__init__(self)
+        self.my_guesses = []
+
+    def guess_coordinates(self):
+        """Computer generates random opponent ship coordinates to try to hit
+        """
+        self.my_guesses.append((randint(0, Ships.grid_size - 1), randint(0, Ships.grid_size - 1)))
+        #print(self.my_guesses)
+
+    def print_grid(self):
+        """
+        Print grid. Ships are not shown, hits are shown as 'X'
+        """
+        for i in range(Ships.grid_size):
+            for j in range(Ships.grid_size):
+                hit = False
+                for (x, y) in self.guesses:
+                    hit = (i, j) == (x, y)
+                    if hit:
+                        print('X ', end=' ')
+                        break
+                if not hit:
+                    print('. ', end=' ')                     
+            print('')
+
 
 def print_game_info():
     print("Welcome to the Battleship game!\n")
@@ -99,6 +132,22 @@ def display_score():
 player = HumanPlayer()
 player.position_ships()
 player.print_grid()
+
+computer = ComputerPlayer()
+computer.position_ships()
+computer.print_grid()
+print('')
+
+computer.guess_coordinates()
+player.guesses = computer.my_guesses
+print(f"Computer guessed {player.guesses}")
+print('')
+
 player.guess_coordinates()
-print(f"{player.name} guessed {player.guess_list}")
+computer.guesses = player.my_guesses
+print(f"{player.name} guessed {computer.guesses}")
+print('')
+
 player.print_grid()
+print('')
+computer.print_grid()
