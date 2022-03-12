@@ -205,7 +205,7 @@ def main():
                 print(f"{player.name} missed")
             print('')
 
-            print(f"score: Computer {player.score} {player.name} {computer.score}")
+            print(f"Score: Computer {player.score} {player.name} {computer.score}")
             print('')
 
             player.print_grid()
@@ -214,6 +214,13 @@ def main():
             print('')
 
             if Ships.number_of_ships in (player.score, computer.score):
+                if player.score != computer.score:
+                    winner = player.name if computer.score == Ships.number_of_ships else "Computer"
+                    print(f"The winner is {winner}")
+                else:
+                    winner = f"{player.name} and Computer"
+                    print(f"The winners are {winner}")
+                print('')
                 break
             string = input("Enter any key to continue or no to stop\n")
             print('')
