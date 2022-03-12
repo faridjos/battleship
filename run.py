@@ -29,7 +29,7 @@ class Ships:
             (x, y) = fun()
             if (x, y) not in array:
                 array.append((x, y))
-                break        
+                break
 
     def position_ships(self):
         """
@@ -132,7 +132,7 @@ class HumanPlayer(Ships, Human):
                             print('@ ', end=' ')
                             break
                     if not found_ship:
-                        print('. ', end=' ')                   
+                        print('. ', end=' ')
             print('')
 
 
@@ -147,7 +147,6 @@ class ComputerPlayer(Ships):
         """Computer generates random opponent ship coordinates to try to hit
         """
         self.add_xy_to_list(self.rand_coord, self.my_guesses)
-        #print(self.my_guesses)
 
     def print_grid(self):
         """
@@ -162,79 +161,69 @@ class ComputerPlayer(Ships):
                         print('X ', end=' ')
                         break
                 if not shot:
-                    print('. ', end=' ')                     
+                    print('. ', end=' ')
             print('')
 
 
 def print_game_info():
+    """Show information about the game
+    """
     print("Welcome to the Battleship game!\n")
 
 
-#print_game_info()
+def main():
+    """Main program
+    """
+    while True:
+        print_game_info()
 
-#while repeat and !noship:
- #   while not is_data_valid():
- #       guess_coordinates()
-#    display_shot_or_miss()
-  #  display_score()
+        player = HumanPlayer()
+        player.position_ships()
+        player.print_grid()
+
+        computer = ComputerPlayer()
+        computer.position_ships()
+        computer.print_grid()
+        print('')
+
+        while True:
+            computer.guess_coordinates()
+            player.guesses = computer.my_guesses
+            print(f"Computer guessed {player.guesses[-1]}")
+            if player.hit():
+                print("Computer hit")
+            else:
+                print("Computer missed")
+            print('')
+
+            player.guess_coordinates()
+            computer.guesses = player.my_guesses
+            print(f"{player.name} guessed {computer.guesses[-1]}")
+            if computer.hit():
+                print(f"{player.name} hit")
+            else:
+                print(f"{player.name} missed")
+            print('')
+
+            print(f"score: Computer {player.score} {player.name} {computer.score}")
+            print('')
+
+            player.print_grid()
+            print('')
+            computer.print_grid()
+            print('')
+
+            if Ships.number_of_ships in (player.score, computer.score):
+                break
+            string = input("Enter any key to continue or no to stop\n")
+            print('')
+            if string.lower() == 'no':
+                break
+
+        string = input("Enter any key to start a new game or no to stop\n")
+        print('')
+        if string.lower() == 'no':
+            break
 
 
-player = HumanPlayer()
-player.position_ships()
-player.print_grid()
-
-computer = ComputerPlayer()
-computer.position_ships()
-computer.print_grid()
-print('')
-
-computer.guess_coordinates()
-player.guesses = computer.my_guesses
-print(f"Computer guessed {player.guesses[-1]}")
-if player.hit():
-    print("Computer hit")
-else:
-    print("Computer missed")
-print('')
-
-player.guess_coordinates()
-computer.guesses = player.my_guesses
-print(f"{player.name} guessed {computer.guesses[-1]}")
-if computer.hit():
-    print("Player hit")
-else:
-    print("Player missed")
-print('')
-
-print(f"score: Computer {player.score} Player {computer.score}")
-print('')
-
-player.print_grid()
-print('')
-computer.print_grid()
-
-
-computer.guess_coordinates()
-player.guesses = computer.my_guesses
-print(f"Computer guessed {player.guesses[-1]}")
-if player.hit():
-    print("Computer hit")
-else:
-    print("Computer missed")
-print('')
-
-player.guess_coordinates()
-computer.guesses = player.my_guesses
-print(f"{player.name} guessed {computer.guesses[-1]}")
-if computer.hit():
-    print("Player hit")
-else:
-    print("Player missed")
-print('')
-
-print(f"score: Computer {player.score} Player {computer.score}")
-print('')
-
-player.print_grid()
-print('')
-computer.print_grid()
+main()
