@@ -84,9 +84,9 @@ class HumanPlayer(Ships, Human):
                 if 0 <= x < self.grid_size:
                     break
                 else:
-                    print(f"The coordinates must be between 0 and {self.grid_size - 1}")
+                    print(f"x and y must be between 0 and {self.grid_size - 1}")
             else:
-                print("You must enter a number!")
+                print("You must enter a integer!")
 
         while True:
             y = input("Guess y-coordinate:\n")
@@ -95,7 +95,7 @@ class HumanPlayer(Ships, Human):
                 if 0 <= y < self.grid_size:
                     break
                 else:
-                    print(f"The coordinates must be between 0 and {self.grid_size - 1}")
+                    print(f"x and y must be between 0 and {self.grid_size - 1}")
             else:
                 print("You must enter a number!")
 
@@ -207,17 +207,19 @@ def main():
                 print(f"{player.name} missed")
             print('')
 
-            print(f"Score: Computer {player.score} {player.name} {computer.score}")
+            print(f'Score: Computer {player.score}, end=" "')
+            print(f"{player.name} {computer.score}")
             print('')
 
             player.print_grid()
             print('')
             computer.print_grid()
             print('')
-
-            if Ships.number_of_ships in (player.score, computer.score):
+            
+            n = Ships.number_of_ships
+            if n in (player.score, computer.score):
                 if player.score != computer.score:
-                    winner = player.name if computer.score == Ships.number_of_ships else "Computer"
+                    winner = player.name if computer.score == n else "Computer"
                     print(f"The winner is {winner}")
                 else:
                     winner = f"{player.name} and Computer"

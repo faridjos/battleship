@@ -12,3 +12,17 @@ To facilitate the development of the project the algorithm of the game was visua
 
 # Features
 The programme starts by printing a welcome message. Random positions are chosen for the ships in both boards. The player guesses a position to try to hit a ship of the computer. The position is validated. The computer also chooses a (random) position to try to sink the player's ship. The program checks if the guesses result in hits or misses and displays the score. The boards are printed. The game continues until all the ships of one side are sunk or the player wants to end the game. He can also choose to see the score of the five latest games. Finally he can either start a new game or stop playing.
+
+<img src="assets/images/start_of_game.PNG">
+
+# Technologies used
+- Python for the code
+- Github for cloud-based storage of project and deployment
+- GitPod for development
+- Git for version control
+
+# Testing
+## Functionality testing
+I tested that the coordinates entered are not repeated; that they are integers between 0 and gridsize - 1; and that the input name is not an empty string.
+## Code validation
+
