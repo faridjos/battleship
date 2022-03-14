@@ -3,7 +3,28 @@ The battleship game is a computer version of the classic paper and pen game. It 
 
 # Table of contents
 
+ [UX](#ux)
+    - [Website owner business goals](#website-owner-business-goals)
+    - [User goals](#user-goals)
+    - [Structure of the project](#structure-of-the-project)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Data model](#data_model)
+- [Testing](#testing)
+    - [Functionality testing](#functionality-testing)
+    - [Code validation](#code-validation)
+    - [Unfixed bugs](#unfixed-bugs) 
+- [Deployment](#deployment)
+- [Credits](#credits)
+
 # UX
+
+## Website owner business goals
+The main objective is to provide a simple and well-known game for the users.
+
+## User goals
+- The user wants to play a classic game on the computer.
+- He wants to store the scores so he can see how well he is doing.
 
 # Structure of the project
 To facilitate the development of the project the algorithm of the game was visualized in a flow diagram using the website lucidchart.
@@ -11,7 +32,8 @@ To facilitate the development of the project the algorithm of the game was visua
 <img src="assets/images/battleship.png">
 
 # Features
-The programme starts by printing a welcome message. Random positions are chosen for the ships in both boards. The player guesses a position to try to hit a ship of the computer. The position is validated. The computer also chooses a (random) position to try to sink the player's ship. The program checks if the guesses result in hits or misses and displays the score. The boards are printed. The game continues until all the ships of one side are sunk or the player wants to end the game. He can also choose to see the score of the five latest games. Finally he can either start a new game or stop playing.
+- The programme starts by printing a welcome message. Random positions are chosen for the ships in both boards. The player guesses a position to try to hit a ship of the computer. The position is validated. The computer also chooses a (random) position to try to sink the player's ship. The program checks if the guesses result in hits or misses and displays the score. The boards are printed. The game continues until all the ships of one side are sunk or the player wants to end the game. He can also choose to see the score of the five latest games. Finally he can either start a new game or stop playing.
+- In the future one can allow for ships of different sizes and the user can decide the positions of his ships.
 
 <img src="assets/images/start_of_game.PNG">
 
@@ -20,6 +42,13 @@ The programme starts by printing a welcome message. Random positions are chosen 
 - Github for cloud-based storage of project and deployment
 - GitPod for development
 - Git for version control
+
+# Data model
+
+We decided to have an object oriented approach. Four classes were defined: The ship class containing grid variables such as grid size and lists that store the positions of the ships and the guesses of the opponent.
+ - The ship class has methods such as randomly assigning positions to the ships.
+ - The human class has just one instance variable which is the name and one method to enter and validate that name. 
+ - The two remaining classes ComputerPlayer and HumanPlayer are similar. They both contain the ship class and have methods to guess coordinates of the ennemy's ship and print the board. Since the methods differ somewhat between the user and the computer I decided to use two classes.
 
 # Testing
 
