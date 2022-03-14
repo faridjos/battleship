@@ -38,7 +38,7 @@ class Ships:
         for _ in range(Ships.number_of_ships):
             self.add_xy_to_list(self.rand_coord, self.coordinates)
 
-        #print(self.coordinates)
+        print(self.coordinates)
 
     def hit(self):
         """Checks if opponent hit a ship"
