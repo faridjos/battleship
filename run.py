@@ -84,7 +84,7 @@ class HumanPlayer(Ships, Human):
                 if 0 <= x < self.grid_size:
                     break
                 else:
-                    print(f"x and y must be between 0 and {self.grid_size - 1}")
+                    print(f"x and y must be 0- {self.grid_size - 1}")
             else:
                 print("You must enter a integer!")
 
@@ -95,7 +95,7 @@ class HumanPlayer(Ships, Human):
                 if 0 <= y < self.grid_size:
                     break
                 else:
-                    print(f"x and y must be between 0 and {self.grid_size - 1}")
+                    print(f"x and y must be 0- {self.grid_size - 1}")
             else:
                 print("You must enter a number!")
 
@@ -215,7 +215,6 @@ def main():
             print('')
             computer.print_grid()
             print('')
-            
             n = Ships.number_of_ships
             if n in (player.score, computer.score):
                 if player.score != computer.score:

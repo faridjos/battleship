@@ -22,7 +22,23 @@ The programme starts by printing a welcome message. Random positions are chosen 
 - Git for version control
 
 # Testing
+
 ## Functionality testing
 I tested that the coordinates entered are not repeated; that they are integers between 0 and gridsize - 1; and that the input name is not an empty string.
-## Code validation
 
+## Code validation
+The code passed through the PEP8 linter without errors.
+
+## Unfixed bugs
+There is no unfixed bugs
+
+# Deployment
+The application was deployed using the Code Institute mock terminal in Heroku. The steps for deployment are as follow.
+- Create an app in Heroku.
+- Set environment variables.
+- Add the backpacks for Python and Node.js in the correct order.
+- Connect to the github repository.
+- The application is ready to be deployed
+
+# Credit
+My inspiration came from the love sandwiches walkthrough project and from the video about the battleship game example application.
