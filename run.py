@@ -207,7 +207,7 @@ def main():
                 print(f"{player.name} missed")
             print('')
 
-            print(f'Score: Computer {player.score}, end=" "')
+            print(f"Score: Computer {player.score}", end=" ")
             print(f"{player.name} {computer.score}")
             print('')
 
