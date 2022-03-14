@@ -178,6 +178,7 @@ def main():
         print_game_info()
 
         player = HumanPlayer()
+        print("")
         player.position_ships()
         player.print_grid()
         print("")
