@@ -1,31 +1,14 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# The battleship game
+The battleship game is a computer version of the classic paper and pen game. It is game for two players. Each player has a board with ships and try to guess the position of the ships of the other player to sink them. In the computer version the user plays against the computer. 
 
-Welcome faridjos,
+# Table of contents
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+# UX
 
-## Reminders
+# Structure of the project
+To facilitate the development of the project the algorithm of the game was visualized in a flow diagram using the website lucidchart.
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+<img src="assets/images/battleship.png">
 
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+# Features
+The programme starts by printing a welcome message. Random positions are chosen for the ships in both boards. The player guesses a position to try to hit a ship of the computer. The position is validated. The computer also chooses a (random) position to try to sink the player's ship. The program checks if the guesses result in hits or misses and displays the score. The boards are printed. The game continues until all the ships of one side are sunk or the player wants to end the game. He can also choose to see the score of the five latest games. Finally he can either start a new game or stop playing.
