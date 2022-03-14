@@ -180,6 +180,7 @@ def main():
         player = HumanPlayer()
         player.position_ships()
         player.print_grid()
+        print("")
 
         computer = ComputerPlayer()
         computer.position_ships()
