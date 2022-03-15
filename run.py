@@ -16,7 +16,7 @@ SHEET = GSPREAD_CLIENT.open("battleship")
 
 class Ships:
     """
-    Store positions of ships and opponent guesses
+    Store positions of ships and enemy guesses
     """
     grid_size = 5
     number_of_ships = 4
@@ -36,7 +36,7 @@ class Ships:
 
     def add_xy_to_list(self, fun, array):
         """
-        Add coordinates to a list
+        Add coordinates to a list with no duplicates
         """
         while True:
             (x, y) = fun()
@@ -51,10 +51,8 @@ class Ships:
         for _ in range(Ships.number_of_ships):
             self.add_xy_to_list(self.rand_coord, self.coordinates)
 
-        print(self.coordinates)
-
     def hit(self):
-        """Checks if opponent hit a ship"
+        """Checks if enemy hit a ship"
         """
         for (x, y) in self.coordinates:
             hit = self.guesses[-1] == (x, y)
@@ -80,7 +78,7 @@ class Human:
 
 
 class HumanPlayer(Ships, Human):
-    """Has method to guess opponent ship coordinates and print grid
+    """Has method to guess enemy ship coordinates and print grid
     """
     def __init__(self):
         Human.__init__(self)
@@ -99,7 +97,7 @@ class HumanPlayer(Ships, Human):
                 else:
                     print(f"x and y must be 0- {self.grid_size - 1}")
             else:
-                print("You must enter a integer!")
+                print("You must enter an integer!")
 
         while True:
             y = input("Guess y-coordinate:\n")
@@ -110,12 +108,12 @@ class HumanPlayer(Ships, Human):
                 else:
                     print(f"x and y must be 0- {self.grid_size - 1}")
             else:
-                print("You must enter a number!")
+                print("You must enter an integer!")
 
         return (x, y)
 
     def guess_coordinates(self):
-        """User enters opponent ship coordinates to try to hit
+        """User enters enemy ship coordinates to try to hit
         """
         while True:
             (x, y) = self.input_coord()
@@ -150,14 +148,14 @@ class HumanPlayer(Ships, Human):
 
 
 class ComputerPlayer(Ships):
-    """Has method to guess opponent ship coordinates and print grid
+    """Has method to guess enemy ship coordinates and print grid
     """
     def __init__(self):
         Ships.__init__(self)
         self.my_guesses = []
 
     def guess_coordinates(self):
-        """Computer generates random opponent ship coordinates to try to hit
+        """Computer generates random enemy ship coordinates to try to hit
         """
         self.add_xy_to_list(self.rand_coord, self.my_guesses)
 
