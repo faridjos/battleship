@@ -1,4 +1,17 @@
 from random import randint
+import gspread
+from google.oauth2.service_account import Credentials
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file("creds.json")
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open("battleship")
 
 
 class Ships:
@@ -165,6 +178,32 @@ class ComputerPlayer(Ships):
             print('')
 
 
+def store_score(score):
+    """
+    Store scores in google sheet
+    """
+    print("Sending score to google sheet...")
+    score_sheet = SHEET.worksheet('score_sheet')
+    score_sheet.append_row(score)
+    print('Storing score in score_sheet successful.\n')
+
+
+def get_last_5_scores():
+    """
+    Collect the last 5 scores
+    """
+    score_sheet = SHEET.worksheet('score_sheet')
+    data = score_sheet.get_all_values()
+    nr_of_rows = len(data)
+    ind_max = min(nr_of_rows, 5)
+
+    rows = []
+    for ind in range(-ind_max, 0):
+        row = data[ind]
+        rows.append(row)
+
+    return rows
+
 def print_game_info():
     """Show information about the game
     """
@@ -207,8 +246,8 @@ def main():
                 print(f"{player.name} missed")
             print('')
 
-            print(f"Score: Computer {player.score}", end=" ")
-            print(f"{player.name} {computer.score}")
+            print(f"Score: {player.name} {computer.score}",  end=" ")
+            print(f"Computer {player.score}")
             print('')
 
             player.print_grid()
@@ -224,7 +263,12 @@ def main():
                     winner = f"{player.name} and Computer"
                     print(f"The winners are {winner}")
                 print('')
-                break
+                score = [computer.score, player.score]
+                store_score(score)
+                print("The previous scores are: ")
+                print(get_last_5_scores())
+                print(" ")
+
             string = input("Enter any key to continue or no to stop\n")
             print('')
             if string.lower() == 'no':
@@ -234,6 +278,7 @@ def main():
         print('')
         if string.lower() == 'no':
             break
+        
 
 
 main()
