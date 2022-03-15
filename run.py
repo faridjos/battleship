@@ -198,6 +198,8 @@ def get_last_5_scores():
     rows = []
     for ind in range(-ind_max, 0):
         row = data[ind]
+        for ind2 in range(0, 2):
+            row[ind2] = int(row[ind2])
         rows.append(row)
 
     return rows
